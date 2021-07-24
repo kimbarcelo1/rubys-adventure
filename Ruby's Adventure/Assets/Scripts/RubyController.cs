@@ -5,11 +5,20 @@ using UnityEngine;
 public class RubyController : MonoBehaviour
 {
     public int maxHealth = 5;
+    public float speed = 3.0f;
     int currentHealth;
 
     Rigidbody2D rb2d;
     float horizontal;
     float vertical;
+
+    public int health 
+    { 
+        get 
+        { 
+            return currentHealth; 
+        } 
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +41,13 @@ public class RubyController : MonoBehaviour
     {
         Vector2 position = rb2d.position;
 
-        position.x = position.x + 3.0f * horizontal * Time.deltaTime;
-        position.y = position.y + 3.0f * vertical * Time.deltaTime;
+        position.x = position.x + speed * horizontal * Time.deltaTime;
+        position.y = position.y + speed * vertical * Time.deltaTime;
 
         rb2d.MovePosition(position);
     }
 
-    void ChangeHealth(int amount)
+    public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth + "/" + maxHealth);
